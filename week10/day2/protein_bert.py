@@ -121,6 +121,16 @@ class ProteinBERT(nn.Module):
         logits = self.mlm_head(x)
         return logits
 
+    # week 4 新增
+    def encode(self, src, src_key_padding_mask=None):
+        x = self.embedding(src)
+        x = self.pe(x)
+        x = self.dropout(x)
+        for layer in self.layers:
+            x = layer(x, src_key_padding_mask=src_key_padding_mask)
+        x = self.norm(x)
+        return x   # 不走 mlm_head
+
 
 # ── TODO 3：验证函数 ──────────────────────────────────────────
 def verify_model():
