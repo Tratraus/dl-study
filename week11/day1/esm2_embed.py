@@ -3,7 +3,7 @@
 
 import torch
 import numpy as np
-from transformers import AutoTokenizer, AutoModel
+from transformers import AutoTokenizer, EsmModel
 
 
 # ── 常量 ──────────────────────────────────────────────────────
@@ -48,7 +48,10 @@ def load_esm2(model_name: str = MODEL_NAME, device: torch.device = torch.device(
     返回：(tokenizer, model)
     """
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModel.from_pretrained(model_name)
+    model = EsmModel.from_pretrained(        # ✅ AutoModel → EsmModel
+        model_name,
+        attn_implementation="eager"          # ✅ 新增
+    )
     model.to(device)
     model.eval()
     return tokenizer, model
