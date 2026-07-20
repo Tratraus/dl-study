@@ -35,7 +35,7 @@ python tools/analyze_label_frequency.py --k 50
 pytest tests/test_day1_data.py -v
 
 # 4. 确定性自检（每天开工前必须先跑这个）
-python tools/verify_determinism.py
+python -m tools.verify_determinism
 ```
 
 ## 设计原则
