@@ -1,3 +1,4 @@
+import torch
 def test_pos_weight_shape():
     # pos_weight的长度必须等于标签数K
     assert pos_weight.shape[0] == K
